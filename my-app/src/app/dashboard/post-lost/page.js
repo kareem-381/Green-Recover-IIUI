@@ -37,30 +37,43 @@ export default function PostLostItem() {
       const userObj = sessionToken ? JSON.parse(sessionToken) : null
       const userGender = userObj?.gender || "Male"
 
-      const dataPayload = new FormData()
-      dataPayload.append("fullName", formData.fullName || "")
-      dataPayload.append("regNumber", formData.regNumber || "")
-      dataPayload.append("iiuiEmail", formData.iiuiEmail || "")
-      dataPayload.append("cellNumber", formData.cellNumber || "")
-      dataPayload.append("gender", userGender)
-      dataPayload.append("category", formData.category || "ID Card")
-      dataPayload.append("location", formData.lostLocation || "")
-      dataPayload.append("timeLost", formData.timeLost || "")
-
       const cleanDescription = formData.description || ""
       const finalDescription = formData.rewardOffered
         ? `${cleanDescription} | 🎁 Reward: ${formData.rewardOffered}`
         : cleanDescription
 
-      dataPayload.append("description", finalDescription)
-
-      if (formData.itemImage) {
-        dataPayload.append("itemImage", formData.itemImage)
+      // Base payload structure ready for text translation
+      const payload = {
+        fullName: formData.fullName || "",
+        regNumber: formData.regNumber || "",
+        iiuiEmail: formData.iiuiEmail || "",
+        cellNumber: formData.cellNumber || "",
+        gender: userGender,
+        category: formData.category || "ID Card",
+        location: formData.lostLocation || "",
+        timeLost: formData.timeLost || "",
+        description: finalDescription,
+        imageBase64: null // Default state if no picture is uploaded
       }
 
+      // 🧠 Bypasses Serverless EROFS blocks by converting images to raw Base64 strings
+      if (formData.itemImage) {
+        const convertToBase64 = (file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = (error) => reject(error)
+          })
+        }
+        payload.imageBase64 = await convertToBase64(formData.itemImage)
+      }
+
+      // Hit our explicit backend route using clean application/json text formatting
       const res = await fetch("/api/posts/lost", {
         method: "POST",
-        body: dataPayload,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       })
 
       const data = await res.json()
@@ -77,7 +90,7 @@ export default function PostLostItem() {
       alert("Failed to write report payload to server gateway.")
     }
   }
-
+  
   return (
     <div className="min-h-[calc(100vh-150px)] w-full flex justify-center items-center py-10">
       <form onSubmit={handleSubmit} className="h-auto w-125 bg-[#0c1a12] rounded-xl p-7.5 box-border shadow-2xl border border-[#14532d]">
