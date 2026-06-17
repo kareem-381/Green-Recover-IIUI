@@ -157,15 +157,15 @@ export default function SignIn() {
             </button>
           </div>
 
-          {/* 🔗 Forgot Password Link Placement */}
-          <div style={{ textAlign: "right", width: "400px", marginLeft: "20px", marginTop: "-10px" }}>
-            <span 
-              onClick={() => { setShowModal(true); setModalStep(1); setModalError(""); setModalMessage(""); }}
-              style={{ color: "#84cc16", cursor: "pointer", fontSize: "13px", textDecoration: "underline" }}
-            >
-              Forgot Password?
-            </span>
-          </div>
+          {/* 🔗 RESPONSIVE Forgot Password Link Alignment Box */}
+<div style={{ textAlign: "right", width: "100%", marginTop: "-10px", marginBottom: "15px" }}>
+  <span 
+    onClick={() => { setShowModal(true); setModalStep(1); setModalError(""); setModalMessage(""); }}
+    style={{ color: "#84cc16", cursor: "pointer", fontSize: "13px", textDecoration: "underline" }}
+  >
+    Forgot Password?
+  </span>
+</div>
 
           <button type="submit" disabled={loading} style={{ marginTop: "25px" }}>
             {loading ? "Signing In..." : "Sign In"}

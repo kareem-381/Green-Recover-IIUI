@@ -6,48 +6,50 @@
     display: flex;
     justify-content: center;
     align-items: center; 
+    padding: 20px; /* 🎯 Breathing room on external phone chassis edges */
+    box-sizing: border-box;
 }
 
 .formCard {
-    height: auto; /* Changed to auto so it scales nicely when errors pop up */
+    height: auto;
     min-height: 400px; 
-    width: 500px;
+    width: 100%; /* 🎯 Fluid by default on phone widths */
+    max-width: 500px; /* 🎯 Safe lock constraint boundary on desktop frames */
     background-color: #0c1a12; 
     border-radius: 12px;
-    padding: 30px;
+    padding: 25px; /* Balanced interior padding box */
     box-sizing: border-box;
 }
 
 .formCard h2 {
     text-align: center;
     color: #f0fdf4; 
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 25px; 
 }
 
 .formCard p {
-    margin-left: 25px;
-    font-size: larger;
+    font-size: 16px;
     color: #4ade80; 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    margin-left: 0; /* 🎯 REMOVED static indent to protect mobile layouts */
 }
 
 .formCard input {
     background-color: #14532d; 
-    width: 400px;
-    margin-left: 20px;
-    padding-left: 20px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    width: 100%; /* 🎯 Fills parent container safely */
+    padding: 10px 15px; /* Chunky touch target footprint */
     border-radius: 10px;
     color: #bbf7d0; 
-    border: 1px solid transparent; /* Added transparent border to prevent shifting on error layout updates */
+    border: 1px solid transparent;
     outline: none;
     margin-bottom: 20px;
+    margin-left: 0; /* 🎯 REMOVED alignment shift */
+    box-sizing: border-box;
 }
 
-/* 🟥 HIGH-CONTRAST RED ERROR ALERT CONTAINER */
+/* 🟥 COMPACT RESPONSIVE ALERT WRAPPER */
 .errorAlert {
     color: #f87171;
     background-color: rgba(127, 29, 29, 0.4);
@@ -55,9 +57,9 @@
     font-size: 14px;
     padding: 10px 15px;
     border-radius: 8px;
-    width: 400px;
-    margin-left: 20px;
+    width: 100%; /* 🎯 Auto-scales fluidly inside card container walls */
     margin-bottom: 15px;
+    margin-left: 0; /* 🎯 REMOVED alignment shift */
     text-align: center;
     font-weight: 500;
     box-sizing: border-box;
@@ -66,15 +68,15 @@
 .formCard button {
     margin-top: 20px;
     background-color: #84cc16; 
-    width: 400px;
-    margin-left: 20px;
-    padding: 10px 0;
+    width: 100%; /* 🎯 Spans parent layout bounds */
+    padding: 12px 0;
     border-radius: 15px;
     color: #1a2e05; 
-    font-size: larger;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
     cursor: pointer;
+    margin-left: 0; /* 🎯 REMOVED alignment shift */
     transition: opacity 0.2s ease-in-out;
 }
 
@@ -91,21 +93,19 @@
 /* 👁️ PASSWORD FIELD WRAPPER CLASS */
 .passwordWrapper {
     position: relative;
-    width: 400px;
-    margin-left: 20px;
+    width: 100%; /* 🎯 Scales dynamically */
+    margin-left: 0; /* 🎯 REMOVED alignment shift */
     margin-bottom: 20px;
 }
 
-/* Ensure the input fills the 400px wrapper wrapper nicely without double margins */
 .passwordWrapper input {
     width: 100% !important;
     margin-left: 0 !important;
     margin-bottom: 0 !important;
-    padding-right: 45px; /* Creates invisible padding room so text never goes under the eye icon */
+    padding-right: 45px; 
     box-sizing: border-box;
 }
 
-/* Float the absolute eye icon button perfectly centered on the right interior wall */
 .eyeButton {
     position: absolute;
     right: 15px;

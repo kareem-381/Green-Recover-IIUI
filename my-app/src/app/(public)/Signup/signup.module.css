@@ -1,57 +1,58 @@
+/* src/app/(public)/signup/signup.module.css */
+
 .maincontainer {
   min-height: calc(100vh - 150px);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center; 
+  padding: 20px; /* Protects smartphone frame viewports */
+  box-sizing: border-box;
 }
 
 .formCard {
   height: auto; 
-  min-height: 620px;
-  width: 500px;
+  min-height: 550px;
+  width: 100%; /* 🎯 Fluid mapping matching display width metrics */
+  max-width: 500px; /* 🎯 Safe limit locking constraint for large screens */
   background-color: #0c1a12;
   border-radius: 12px;
-  padding: 30px;
+  padding: 25px;
   box-sizing: border-box;
 }
 
 .formCard h2 {
   text-align: center;
   color: #f0fdf4;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .formCard p {
-  margin-left: 25px;
-  font-size: larger;
+  font-size: 16px;
   color: #4ade80;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  margin-left: 0; /* 🎯 REMOVED static indent */
 }
 
 .formCard input {
   background-color: #14532d;
-  width: 400px;
-  margin-left: 20px;
-  padding-left: 20px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  width: 100%; /* 🎯 Fluid viewport stretch execution */
+  padding: 10px 15px;
   border-radius: 10px;
   color: #bbf7d0;
   border: 1px solid transparent;
   outline: none;
   margin-bottom: 20px;
+  margin-left: 0; /* 🎯 REMOVED static indent */
+  box-sizing: border-box;
 }
 
 .genderSelect {
   background-color: #14532d;
-  width: 400px;
-  margin-left: 20px;
-  padding-left: 20px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  width: 100%; /* 🎯 Fluid select layout expansion */
+  padding: 10px 15px;
   border-radius: 10px;
   color: #bbf7d0;
   border: 1px solid transparent;
@@ -59,6 +60,8 @@
   margin-bottom: 20px;
   font-size: 15px;
   cursor: pointer;
+  margin-left: 0; /* 🎯 REMOVED static indent */
+  box-sizing: border-box;
 }
 
 .errorAlert {
@@ -68,9 +71,9 @@
   font-size: 14px;
   padding: 10px 15px;
   border-radius: 8px;
-  width: 400px;
-  margin-left: 20px;
+  width: 100%; /* 🎯 Dynamic width scaling */
   margin-bottom: 15px;
+  margin-left: 0; /* 🎯 REMOVED static indent */
   text-align: center;
   font-weight: 500;
   box-sizing: border-box;
@@ -79,15 +82,15 @@
 .formCard button {
   margin-top: 10px;
   background-color: #84cc16;
-  width: 400px;
-  margin-left: 20px;
-  padding: 10px 0;
+  width: 100%; /* 🎯 Dynamic width scaling */
+  padding: 12px 0;
   border-radius: 15px;
   color: #1a2e05;
-  font-size: larger;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
+  margin-left: 0; /* 🎯 REMOVED static indent */
 }
 
 .formCard button:hover {
@@ -117,21 +120,19 @@
 /* 👁️ PASSWORD FIELD WRAPPER CLASS */
 .passwordWrapper {
     position: relative;
-    width: 400px;
-    margin-left: 20px;
+    width: 100%; /* 🎯 Scales fluidly inside layout */
+    margin-left: 0; /* 🎯 REMOVED static indent */
     margin-bottom: 20px;
 }
 
-/* Ensure the input fills the 400px wrapper wrapper nicely without double margins */
 .passwordWrapper input {
     width: 100% !important;
     margin-left: 0 !important;
     margin-bottom: 0 !important;
-    padding-right: 45px; /* Creates invisible padding room so text never goes under the eye icon */
+    padding-right: 45px; 
     box-sizing: border-box;
 }
 
-/* Float the absolute eye icon button perfectly centered on the right interior wall */
 .eyeButton {
     position: absolute;
     right: 15px;
