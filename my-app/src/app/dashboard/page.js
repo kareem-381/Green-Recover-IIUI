@@ -36,20 +36,30 @@ export default function DashboardHome() {
   }, [router])
 
   // 🔥 GENDER PRIVACY FIREWALL & FILTER MATCH ENGINE
-  const filteredPosts = posts.filter((post) => {
-    if (currentUser && post.gender?.toLowerCase() !== currentUser.gender?.toLowerCase()) {
-      return false
-    }
+  // src/app/dashboard/page.js
 
-    const itemTitle = post.title || `Missing ${post.category}`
-    const matchesSearch = itemTitle.toLowerCase().includes(search.toLowerCase()) ||
-      (post.description && post.description.toLowerCase().includes(search.toLowerCase()))
-      
-    const matchesType = filterType === "all" || post.type === filterType
-    const matchesCategory = category === "all" || post.category === category
+// 🔥 CRASH-PROOFED CAMPUS FILTER MATCH ENGINE
+const filteredPosts = posts.filter((post) => {
+  // 1. Gender Privacy Firewall Check
+  if (currentUser && post.gender?.toLowerCase() !== currentUser.gender?.toLowerCase()) {
+    return false
+  }
 
-    return matchesSearch && matchesType && matchesCategory
-  })
+  // 2. 🎯 FIX: Fallback safely to category since "title" column doesn't exist in your SQL schema
+  const itemTitle = post.category || "Uncategorized Item";
+  const itemDescription = post.description || "";
+  const currentSearchTerm = search ? search.toLowerCase() : "";
+
+  // 3. Safe string matching logic execution
+  const matchesSearch = 
+    itemTitle.toLowerCase().includes(currentSearchTerm) || 
+    itemDescription.toLowerCase().includes(currentSearchTerm);
+    
+  const matchesType = filterType === "all" || post.type === filterType
+  const matchesCategory = category === "all" || post.category === category
+
+  return matchesSearch && matchesType && matchesCategory
+})
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
