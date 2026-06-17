@@ -2,11 +2,15 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 
+// 🎯 THE CRUCIAL VERCEL FIX: Forces Next.js to treat this route as a live, dynamic API endpoint 
+// instead of trying to statically optimize it during the build step!
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const db = await connectDB();
 
-    // 1. Ensure table structural properties exist
+    // 1. Double check table structure health
     await db.query(`
       CREATE TABLE IF NOT EXISTS posts (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,12 +24,12 @@ export async function GET() {
         location VARCHAR(255) NOT NULL,
         time_found VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        image_path LONGTEXT NULL, -- Changed to LONGTEXT to safely hold big Base64 image strings!
+        image_path LONGTEXT NULL, 
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
-    // 2. Fetch all active rows
+    // 2. Clear SQL data row lookup selection
     const [rows] = await db.query(`
       SELECT 
         id, type, category, location, time_found, 
@@ -34,7 +38,7 @@ export async function GET() {
       ORDER BY id DESC
     `);
     
-    console.log("🚀 FEED API LOG -> Sent Rows cleanly:", rows.length);
+    console.log("🚀 FEED API LOG -> Live Sync complete. Sending rows:", rows.length);
     
     return NextResponse.json({ success: true, posts: rows || [] }, { 
       status: 200,

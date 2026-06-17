@@ -11,17 +11,22 @@ export default function DashboardHome() {
   const [filterType, setFilterType] = useState("all")
   const [category, setCategory] = useState("all")
   const [currentUser, setCurrentUser] = useState(null)
-
-  useEffect(() => {
+useEffect(() => {
     async function loadFeed() {
       try {
         const res = await fetch("/api/posts")
+        
+        // 🎯 CRASH PROTECTION: If the server says 405 or 500, catch it here before running .json()
+        if (!res.ok) {
+          throw new Error(`Server returned HTTP status ${res.status}`);
+        }
+
         const data = await res.json()
         if (data.success) {
           setPosts(data.posts)
         }
       } catch (err) {
-        console.error("Failed to load live database feed:", err)
+        console.error("Failed to load live database feed safely:", err)
       }
     }
 
@@ -33,7 +38,9 @@ export default function DashboardHome() {
     }
 
     loadFeed()
-  }, [router])
+    // 🎯 CRITICAL FIX: Keep this dependency array completely empty (or just containing router) 
+    // to prevent infinite re-rendering cycles on error states!
+  }, []);
 
   // 🔥 GENDER PRIVACY FIREWALL & FILTER MATCH ENGINE
   // src/app/dashboard/page.js
