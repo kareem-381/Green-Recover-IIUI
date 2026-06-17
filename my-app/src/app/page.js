@@ -1,4 +1,3 @@
-// src/app/page.js
 import PublicLayout from "./(public)/layout";
 import PublicHomePage from "./(public)/page";
 
