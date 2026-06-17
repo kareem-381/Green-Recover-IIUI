@@ -1,0 +1,79 @@
+.rulesContainer {
+    min-height: calc(100vh - 150px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.rulesCard {
+    max-width: 800px;
+    width: 100%;
+    background-color: #0c1a12; /* Matching dark-green card container */
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0px 12px 30px #1a2e05; /* Glow shadow matching your sign-in card */
+    box-sizing: border-box;
+    border: 1px solid #14532d;
+}
+
+.rulesCard h2 {
+    text-align: center;
+    color: #f0fdf4;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #84cc16; /* Lime accent text color */
+    font-size: 15px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #4ade80, transparent);
+    margin-bottom: 30px;
+}
+
+.ruleSection {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(20, 83, 45, 0.4);
+}
+
+/* Removes the bottom line from the last section so it doesn't touch the card edge */
+.ruleSection:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.rulesCard h3 {
+    color: #4ade80; /* Clean bright green header text color */
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.rulesCard p {
+    color: #bbf7d0; /* Soft green body text color for high legibility */
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
+
+/* Highlights critical values like 10,000 PKR or System Administrator */
+.rulesCard strong {
+    color: #84cc16;
+    font-weight: 600;
+}

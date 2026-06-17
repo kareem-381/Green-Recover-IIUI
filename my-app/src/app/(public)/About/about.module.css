@@ -1,0 +1,23 @@
+
+.container{
+   background-color: burlywood;
+   border-radius:10px;
+}
+
+.abbasi{
+    height: 250px;
+    width:250px;
+    border: 4px solid black;
+    border-radius:50%;
+    margin-left: 36px;
+    margin-top: 25px;
+}
+
+.kareem{
+    height: 250px;
+    width:250px;
+    border: 4px solid black;
+    border-radius:50%;
+}
+
+
