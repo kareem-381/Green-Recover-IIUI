@@ -28,69 +28,70 @@ export default function PostLostItem() {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log("Submitting Lost Item state snapshot:", formData)
+ const handleSubmit = async (e) => {
+  e.preventDefault()
+  console.log("Submitting Lost Item state snapshot:", formData)
 
-    try {
-      const sessionToken = typeof window !== "undefined" ? localStorage.getItem("iiui_user_logged") : null
-      const userObj = sessionToken ? JSON.parse(sessionToken) : null
-      const userGender = userObj?.gender || "Male"
+  try {
+    const sessionToken = typeof window !== "undefined" ? localStorage.getItem("iiui_user_logged") : null
+    const userObj = sessionToken ? JSON.parse(sessionToken) : null
+    const userGender = userObj?.gender || "Male"
 
-      const cleanDescription = formData.description || ""
-      const finalDescription = formData.rewardOffered
-        ? `${cleanDescription} | 🎁 Reward: ${formData.rewardOffered}`
-        : cleanDescription
+    const cleanDescription = formData.description || ""
+    const finalDescription = formData.rewardOffered
+      ? `${cleanDescription} | 🎁 Reward: ${formData.rewardOffered}`
+      : cleanDescription
 
-      // Base payload structure ready for text translation
-      const payload = {
-        fullName: formData.fullName || "",
-        regNumber: formData.regNumber || "",
-        iiuiEmail: formData.iiuiEmail || "",
-        cellNumber: formData.cellNumber || "",
-        gender: userGender,
-        category: formData.category || "ID Card",
-        location: formData.lostLocation || "",
-        timeLost: formData.timeLost || "",
-        description: finalDescription,
-        imageBase64: null // Default state if no picture is uploaded
+    let imageBase64String = "";
+
+    // Convert image to a safe text string if it exists
+    if (formData.itemImage) {
+      const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = () => resolve(reader.result)
+          reader.onerror = (error) => reject(error)
+        })
       }
-
-      // 🧠 Bypasses Serverless EROFS blocks by converting images to raw Base64 strings
-      if (formData.itemImage) {
-        const convertToBase64 = (file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = () => resolve(reader.result)
-            reader.onerror = (error) => reject(error)
-          })
-        }
-        payload.imageBase64 = await convertToBase64(formData.itemImage)
-      }
-
-      // Hit our explicit backend route using clean application/json text formatting
-      const res = await fetch("/api/posts/lost", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await res.json()
-
-      if (data.success) {
-        alert("Lost item report broadcasted successfully!")
-        router.push("/dashboard")
-        router.refresh()
-      } else {
-        alert("Database rejection: " + data.message)
-      }
-    } catch (err) {
-      console.error("🔥 Frontend Transmission Route Error:", err)
-      alert("Failed to write report payload to server gateway.")
+      imageBase64String = await convertToBase64(formData.itemImage)
     }
+
+    // 🎯 THE FIX: Go back to FormData so Next.js gets its "multipart/form-data" Content-Type!
+    const dataPayload = new FormData()
+    dataPayload.append("fullName", formData.fullName || "")
+    dataPayload.append("regNumber", formData.regNumber || "")
+    dataPayload.append("iiuiEmail", formData.iiuiEmail || "")
+    dataPayload.append("cellNumber", formData.cellNumber || "")
+    dataPayload.append("gender", userGender)
+    dataPayload.append("category", formData.category || "ID Card")
+    dataPayload.append("location", formData.lostLocation || "")
+    dataPayload.append("timeLost", formData.timeLost || "")
+    dataPayload.append("description", finalDescription)
+    
+    // We append the raw TEXT string instead of the actual file! 
+    dataPayload.append("imageBase64", imageBase64String)
+
+    // DO NOT manually set any Headers here. Let the browser append the dynamic multi-part boundary automatically.
+    const res = await fetch("/api/posts/lost", {
+      method: "POST",
+      body: dataPayload,
+    })
+
+    const data = await res.json()
+
+    if (data.success) {
+      alert("Lost item report broadcasted successfully!")
+      router.push("/dashboard")
+      router.refresh()
+    } else {
+      alert("Database rejection: " + data.message)
+    }
+  } catch (err) {
+    console.error("🔥 Frontend Transmission Route Error:", err)
+    alert("Failed to write report payload to server gateway.")
   }
-  
+}
   return (
     <div className="min-h-[calc(100vh-150px)] w-full flex justify-center items-center py-10">
       <form onSubmit={handleSubmit} className="h-auto w-125 bg-[#0c1a12] rounded-xl p-7.5 box-border shadow-2xl border border-[#14532d]">
