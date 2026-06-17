@@ -1,0 +1,148 @@
+.maincontainer {
+  min-height: calc(100vh - 150px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.formCard {
+  height: auto; 
+  min-height: 620px;
+  width: 500px;
+  background-color: #0c1a12;
+  border-radius: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.formCard h2 {
+  text-align: center;
+  color: #f0fdf4;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.formCard p {
+  margin-left: 25px;
+  font-size: larger;
+  color: #4ade80;
+  margin-bottom: 10px;
+}
+
+.formCard input {
+  background-color: #14532d;
+  width: 400px;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 10px;
+  color: #bbf7d0;
+  border: 1px solid transparent;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.genderSelect {
+  background-color: #14532d;
+  width: 400px;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 10px;
+  color: #bbf7d0;
+  border: 1px solid transparent;
+  outline: none;
+  margin-bottom: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.errorAlert {
+  color: #f87171;
+  background-color: rgba(127, 29, 29, 0.4);
+  border: 1px solid rgba(220, 38, 38, 0.5);
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  width: 400px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.formCard button {
+  margin-top: 10px;
+  background-color: #84cc16;
+  width: 400px;
+  margin-left: 20px;
+  padding: 10px 0;
+  border-radius: 15px;
+  color: #1a2e05;
+  font-size: larger;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.formCard button:hover {
+  opacity: 0.9;
+}
+
+.clockText {
+  color: #bbf7d0;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.resendBtn {
+  background: none !important;
+  color: #84cc16 !important;
+  font-size: 14px !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 5px auto !important;
+  display: block;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+
+/* 👁️ PASSWORD FIELD WRAPPER CLASS */
+.passwordWrapper {
+    position: relative;
+    width: 400px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ensure the input fills the 400px wrapper wrapper nicely without double margins */
+.passwordWrapper input {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    padding-right: 45px; /* Creates invisible padding room so text never goes under the eye icon */
+    box-sizing: border-box;
+}
+
+/* Float the absolute eye icon button perfectly centered on the right interior wall */
+.eyeButton {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    color: #bbf7d0;
+}
