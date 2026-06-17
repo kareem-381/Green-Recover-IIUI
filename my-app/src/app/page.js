@@ -1,7 +1,11 @@
 // src/app/page.js
-import { redirect } from 'next/navigation';
+import PublicLayout from "./(public)/layout";
+import PublicHomePage from "./(public)/page";
 
 export default function RootPage() {
-  // Bounces users straight into your login interface or dashboard automatically!
-  redirect('/(public)'); 
+  return (
+    <PublicLayout>
+      <PublicHomePage />
+    </PublicLayout>
+  );
 }
