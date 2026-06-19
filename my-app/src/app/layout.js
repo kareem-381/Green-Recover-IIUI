@@ -12,7 +12,7 @@ export const metadata = {
   },
   // 🎯 GOOGLE SEARCH CONSOLE HANDSHAKE COMPLETED
   verification: {
-    google: "google35a9216562899994",
+    google: "h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM",
   },
 };
 <meta name="google-site-verification" content="h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM" />
