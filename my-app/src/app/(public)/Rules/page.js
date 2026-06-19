@@ -1,3 +1,4 @@
+// src/app/(public)/rules/page.js
 import styles from "./rules.module.css";
 
 export default function Rules() {
@@ -6,57 +7,60 @@ export default function Rules() {
       <div className={styles.rulesCard}>
         <h2>Green Recover — Official Rules & Code of Conduct</h2>
         <p className={styles.subtitle}>
-          All students and users of the IIUI Lost & Found network must strictly adhere to the regulations below.
+          All students and users of the IIUI Lost & Found network must strictly adhere to the campus platform regulations below.
         </p>
         
         <hr className={styles.divider} />
 
-        {/* 1. Mandatory Admin Verification */}
+        {/* 1. Instant Public Ingestion & Post-Moderation */}
         <div className={styles.ruleSection}>
-          <h3>1. Mandatory Admin Verification</h3>
+          <h3>1. Instant Public Ingestion & Post-Moderation</h3>
           <p>
-            When you submit a report through the "Post Lost & Found Item" form, a <strong>System Administrator </strong> 
-             will review and verify the details. Your advertisement will only be officially posted on the public campus feed 
-            after receiving formal administrative approval.
+            When you submit a report through our lost or found submission channels, your entry is 
+            <strong> immediately published live </strong> to the active campus feed and broadcasted across your 
+            respective network. To maintain community safety, System Administrators retain full authority to 
+            audit live listings and permanently delete any content that violates campus guidelines.
           </p>
         </div>
 
-        {/* 2. Accountability & Media Policy */}
+        {/* 2. Strict Segment Isolation & Privacy Policy */}
         <div className={styles.ruleSection}>
-          <h3>2. Prohibited Media & Content Policy</h3>
+          <h3>2. Segment Isolation & Targeted Routing</h3>
           <p>
-            If any male or female user is found uploading or submitting any form of illegal, unauthorized, 
-            or explicit videos or images to the admin verification queue, they will face an immediate permanent 
-            platform ban and a mandatory fine of <strong>10,000 PKR</strong> for serious misconduct.
+            To optimize student privacy and ensure completely safe communication, Green Recover runs on 
+            <strong> separate, independent routing loops for male and female campus sectors</strong>. Posts, 
+            contact information, and WhatsApp automation alerts are entirely locked within your respective 
+            academic domain segment, preventing cross-channel visibility or unauthorized interactions.
           </p>
         </div>
 
-        {/* 3. General Misuse & Illegal Activity */}
+        {/* 3. Prohibited Media & Account Misconduct */}
         <div className={styles.ruleSection}>
-          <h3>3. Zero Tolerance for Illegal Activity</h3>
+          <h3>3. Content Integrity & Penalties</h3>
           <p>
-            Any form of fraudulent activity, making fake claims on items that do not belong to you, or utilizing 
-            the platform for harassment will not be tolerated. Severe offenses will be escalated directly to university 
-            authorities and campus security.
+            Submitting fraudulent items, spamming fake claims, or uploading unauthorized media to the public feed 
+            is strictly illegal. Violators face an immediate <strong>permanent account ban</strong>, immediate 
+            escalation to IIUI Security Authorities, and a mandatory fine of <strong>10,000 PKR</strong> for serious institutional misconduct.
           </p>
         </div>
 
         {/* 4. Storage Limits */}
         <div className={styles.ruleSection}>
-          <h3>4. 8-Day Record Limit</h3>
+          <h3>4. 8-Day Automated Record Limit</h3>
           <p>
-            Lost and found item listings are stored and tracked on the network for a maximum of <strong> 8 days </strong> 
-            from the date of submission. Unclaimed items will be archived from the system database automatically after this period.
+            Lost and found listings are tracked and maintained in the active database for a maximum of 
+            <strong> 8 days </strong> from the date of publishing. Unclaimed or unresolved listings will be 
+            automatically archived by our background cleanup routines to keep the live feed accurate and performant.
           </p>
         </div>
 
         {/* 5. Safety Disclaimer */}
         <div className={styles.ruleSection}>
-          <h3>5. Security & Handling Disclaimer</h3>
+          <h3>5. Security Screening Disclaimer</h3>
           <p>
-            Certain logged items may undergo mandatory security screening or disinfection procedures by campus security 
-            as a precautionary measure. While we strive to facilitate safe returns, the network cannot guarantee 
-            the item's condition post-inspection.
+            Certain reported items may undergo mandatory security screening or processing by campus authorities 
+            upon recovery. While Green Recover facilitates secure peer-to-peer tracking, the platform is not 
+            liable for the physical condition or handling of items post-inspection.
           </p>
         </div>
 
