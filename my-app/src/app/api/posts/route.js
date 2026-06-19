@@ -2,13 +2,15 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 
-// 🎯 THE CRUCIAL VERCEL FIX: Forces Next.js to treat this route as a live, dynamic API endpoint 
-// instead of trying to statically optimize it during the build step!
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
     const db = await connectDB();
+
+    console.log("🛠️ Attempting database column migration...");
+    await db.query(`ALTER TABLE posts MODIFY COLUMN image_path LONGTEXT NULL;`);
+    console.log("✅ Column migration successful!");
 
     // 1. Double check table structure health
     await db.query(`
