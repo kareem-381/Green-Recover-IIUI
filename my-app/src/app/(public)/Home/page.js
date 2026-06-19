@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+<meta name="google-site-verification" content="h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM" />
+
 export default function Home() {
   return (
     <div id="home-container">
@@ -8,6 +10,7 @@ export default function Home() {
       <section className="islamic-section">
         <p className="islamic-title">Ahkām al-Luqatah (Rules Regarding Lost and Found Items in Islam)</p>
         <p className="islamic-arabic">احکام اللقطہ</p>
+        
         <ul>
           <li>If a person finds something and does not pick it up, there will be no sin on him. However, if he finds it at a place where there is the fear that if he does not pick it up, someone else will pick it and will not return it to its owner, then it becomes <strong>Waajib</strong> on this person to pick it up and return it to its owner.</li>
           <li>Once a person finds a lost item and picks it up, it becomes his responsibility to search for its owner and to return it to him.</li>

@@ -1,14 +1,10 @@
 // src/app/api/posts/found/route.js
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
-import fs from "fs/promises";
-import path from "path";
 
-// 🔌 ULTRAMSG PRODUCTION CLOUD CONFIGURATION
 const ULTRAMSG_INSTANCE = "instance181216"; 
 const ULTRAMSG_TOKEN = "osv8viyss770rlwp"; 
 
-// 🎯 IIUI CAMPUS ROUTING GROUP ID STRINGS
 const MALE_GROUP_ID = "120363426066494393@g.us";   
 const FEMALE_GROUP_ID = "120363409307909561@g.us"; 
 
@@ -25,23 +21,13 @@ export async function POST(req) {
     const location = dataStream.get("location");
     const timeFound = dataStream.get("timeFound");
     const description = dataStream.get("description");
-    const itemImageFile = dataStream.get("itemImage");
-
-    let storedImagePathString = null;
-
-    // Handle incoming image buffers securely
-    if (itemImageFile && itemImageFile.size > 0) {
-      const targetDirectoryPath = path.join(process.cwd(), "public", "uploads");
-      await fs.mkdir(targetDirectoryPath, { recursive: true });
-      const sanitizedName = itemImageFile.name.replace(/\s+/g, "_");
-      const generatedFileName = `${Date.now()}_${sanitizedName}`;
-      await fs.writeFile(path.join(targetDirectoryPath, generatedFileName), Buffer.from(await itemImageFile.arrayBuffer()));
-      storedImagePathString = `/uploads/${generatedFileName}`;
-    }
+    
+    // 🎯 RECOVERY PATCH: Accessing raw Base64 text string passed up from client form file configuration
+    const imageBase64 = dataStream.get("imageBase64"); 
 
     const db = await connectDB();
 
-    // Ensure database infrastructure table limits are initialized
+    // 🎯 RECOVERY PATCH: Modified image_path property to handle heavy string inputs natively via LONGTEXT 
     await db.query(`
       CREATE TABLE IF NOT EXISTS posts (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,17 +41,17 @@ export async function POST(req) {
         location VARCHAR(255) NOT NULL,
         time_found VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        image_path VARCHAR(500) NULL,
+        image_path LONGTEXT NULL, 
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
-    // Write found entry to MySQL
+    // Write pristine found entry row to MySQL without interacting with local read-only host storage systems
     await db.query(
       `INSERT INTO posts 
       (type, full_name, reg_number, email, cell_number, gender, category, location, time_found, description, image_path) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      ["found", fullName, regNumber, iiuiEmail, cellNumber, gender, category, location, timeFound, description, storedImagePathString]
+      ["found", fullName, regNumber, iiuiEmail, cellNumber, gender, category, location, timeFound, description, imageBase64 || null]
     );
 
     // ─── 🔊 ULTRAMSG FOUND ITEM ALERTS ENGINE ───
@@ -99,7 +85,6 @@ _Pushed via Green-Recover Cloud Automation Framework._`;
     } catch (apiErr) {
       console.error("❌ Outbound WhatsApp Found Gateway Error:", apiErr.message);
     }
-    // ─── 🔊 ULTRAMSG FOUND ITEM ALERTS ENGINE END ───
 
     return NextResponse.json({ success: true, message: "Found post saved and WhatsApp broadcast complete!" });
 
