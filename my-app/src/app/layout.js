@@ -1,7 +1,5 @@
 // src/app/layout.js
 import "./globals.css";
-
-
 export const metadata = {
   title: "Green Recover | IIUI Lost & Found Portal",
   description: "The official centralized lost and found web utility portal for the International Islamic University Islamabad community.",
@@ -12,8 +10,11 @@ export const metadata = {
     url: "https://green-recover-iiui.vercel.app/Home",
     type: "website",
   },
+  // 🎯 GOOGLE SEARCH CONSOLE HANDSHAKE COMPLETED
+  verification: {
+    google: "google35a9216562899994",
+  },
 };
-
 <meta name="google-site-verification" content="h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM" />
 
 export default function RootLayout({ children }) {
