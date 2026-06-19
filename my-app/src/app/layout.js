@@ -1,5 +1,5 @@
 // src/app/layout.js
-import "./globals.css";
+import "./globals.css"
 export const metadata = {
   title: "Green Recover | IIUI Lost & Found Portal",
   description: "The official centralized lost and found web utility portal for the International Islamic University Islamabad community.",
@@ -12,10 +12,10 @@ export const metadata = {
   },
   // 🎯 GOOGLE SEARCH CONSOLE HANDSHAKE COMPLETED
   verification: {
-    google: "h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM",
+    google: "-nNlwpvAxVSlNPkhymhjJFbzkKWmp-mIZKF473TDplc",
   },
-};
-<meta name="google-site-verification" content="h6g0TbbVeOUd9DYKgI5bv3UV5WSc7mMilOLqVRlwyQM" />
+}
+
 
 export default function RootLayout({ children }) {
   return (
@@ -24,5 +24,5 @@ export default function RootLayout({ children }) {
         {children}
       </body>
     </html>
-  );
+  )
 }
